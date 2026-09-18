@@ -20,8 +20,8 @@ class Bird {
 
 // Create your bird instances using associative arrays
 $bird1 = new Bird([
-    'commonName' => 'Acadian Flycatcher', 
-    'latinName' => 'Empidonax virescens'
+    'commonName' => 'Robin', 
+    'latinName' => 'Turdus migratorius'
 ]);
 
 $bird2 = new Bird([
