@@ -4,7 +4,7 @@
 <?php include(SHARED_PATH . '/public_header.php'); ?>
 
 <?php
-// Initialize ParseCSV with the absolute path to your file
+// Initialize the ParseCSV with the absolute path to your file
 $parser = new ParseCSV(PRIVATE_PATH . '/used_bicycles.csv');
 
 // Execute the parser loop to return an array of data rows
