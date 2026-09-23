@@ -33,7 +33,7 @@ class Bicycle {
   ];
 
   /*
-   * How it is used: Instantiates a Bicycle object using a single associative array parameter.
+   * How it is used: Instantiates the Bicycle object using a single associative array parameter.
    * Why it exists: Using an array decouples the data source structure from the class constructor interface. 
    * If a developer reorders columns or adds new columns to the raw CSV file, a standard 10-parameter signature 
    * would map values to the wrong properties or crash entirely. An associative array safely maps keys independently 
