@@ -59,6 +59,9 @@ class Bicycle {
    * bypassing the rounding, formatting, or data type casting rules defined in the class methods, leading to inconsistent 
    * data states across the application. Text values like brand do not carry these structural risks.
    */
+
+    // Logic handling weight conversions
+    
   public function weight_kg() {
     return number_format($this->weight_kg, 2) . ' kg';
   }
