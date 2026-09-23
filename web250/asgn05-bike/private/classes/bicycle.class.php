@@ -93,6 +93,9 @@ class Bicycle {
    * integer IDs and handle lookup mappings manually. If the dictionary labels change or fallback requirements shift, 
    * the change is managed seamlessly here without modifying any presentation files.
    */
+
+  // Logic handling condition dictionary lookups
+  
   public function condition() {
     if($this->condition_id > 0) {
       return self::CONDITION_OPTIONS[$this->condition_id];
