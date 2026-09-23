@@ -4,7 +4,7 @@
 *   **Choice 1: Option 2 (Filter by Habitat)** – Added a dynamic `$_GET['habitat']` parameter check that strips out unmatching bird entities and displays a narrowed down inventory table.
 *   **Choice 2: Option 5 (Filter Link Navigation)** – Built an active filter list panel with `u()` encoding on path generation and interactive fallback states to view all entries.
 
----
+--- 
 
 ## Concept Check Answers
 
