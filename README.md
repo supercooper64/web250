@@ -30,10 +30,16 @@ Constants belong directly to the class blueprint itself rather than to any indiv
 
 ## Git Log Output
 ```text
-
+* 007688e (origin/asgn05-bird, asgn05-bird) asgn05: Finalized main web250 README with concept answers and git history
+* 7af2627 asgn05-bird: Configured dynamic class autoloader for bird environment
+* b8fa33c asgn05-bird: Configured external CSV pipe delimiter and set up front-end table output
+* d2d3e6d asgn05-bird: Implemented Bird class core properties and null-coalescing constructor
+* 7352f8f (origin/asgn05-bike, asgn05-bike) asgn05-bike: Finalized validation hooks for bike condition
+* 2e8ab8a asgn05-bike: Added calculation methods for gear ratios
+* aac391d asgn05-bike: Bike class definition and initial properties
+* 8d8f709 asgn05-bike: starter code in place
 ```
 
----
 
 ## AI Log
 *   **What I asked:** Asked for clarification on how to set a public static utility class property from outside the class scope before executing an extraction method.
