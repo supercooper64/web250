@@ -1,5 +1,5 @@
 <?php
-// Name: [Your Name Here]
+// Name: Daniel
 // Course: WEB-250
 // Assignment: asgn07
 
