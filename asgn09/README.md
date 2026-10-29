@@ -1,38 +1,38 @@
-# WEB 250 - asgn09: Create a Record
+# Assignment 09 - Create Record with Active Record
 
-This starter is based on the completed reference version of asgn08. It already contains the read-only Active Record methods and pages so everyone can begin asgn09 from roughly the same structure.
+## Overview
 
-## Assignment goal
+This assignment extends the Bird Directory application by implementing the Create portion of CRUD (Create, Read, Update, Delete) using the Active Record pattern.
 
-Add the **Create** portion of CRUD using:
+Users can now add new bird records through a form. Submitted data is validated and stored in the database using PDO prepared statements.
 
-- `public/bird_new.php`
-- a `Bird::create()` instance method
-- a PDO prepared `INSERT`
-- named placeholders and `bindValue()`
+## Features
 
-## Database
+- Display all bird records
+- View individual bird details
+- Create new bird records
+- Form validation for required fields
+- PDO prepared statements for secure database inserts
+- Automatic retrieval of the newly created record ID
 
-Use the existing `wnc_birds` database and `birds` table from the previous assignments.
+## Files Modified
 
-## Credentials
+### public/birds.php
 
-Copy:
+Added a **Create Bird** link above the bird directory table.
 
-```text
-private/db_credentials.example.php
-```
+### public/bird_new.php
 
-to:
+Implemented:
 
-```text
-private/db_credentials.php
-```
+- POST request processing
+- Form validation
+- Creation of Bird objects from submitted form data
+- Redirect after successful record creation
 
-Then enter the database settings for your own local or hosted environment.
+### private/classes/Bird.php
 
-`private/db_credentials.php` is ignored by Git and must not be committed.
+Added:
 
-## Student README TODO
-
-Before submitting asgn09, replace or expand this README with the information requested in the assignment instructions, including your create flow, prepared-statement explanation, MVC direction, Git branch workflow, and final URLs.
+```php
+public function create(): bool
