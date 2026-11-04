@@ -23,7 +23,7 @@ asgn08/
 │   │   └── SandboxBird.php
 │   ├── functions.php
 │   ├── initialize.php
-│   └── db_credentials.php
+│   └── db_credentials.example.php
 ├── public/
 │   ├── index.php
 │   ├── birds.php
