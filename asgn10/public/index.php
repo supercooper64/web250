@@ -21,10 +21,10 @@ try {
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>WEB 250 asgn09 - WNC Birds</title>
+    <title>WEB 250 asgn10 - WNC Birds</title>
 </head>
 <body>
-    <h1>WEB 250 asgn09 - WNC Birds</h1>
+    <h1>WEB 250 asgn10 - WNC Birds</h1>
 
     <p><a href="birds.php">Bird Directory</a></p>
 
