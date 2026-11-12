@@ -21,9 +21,11 @@ $birds = Bird::find_all();
         <a href="index.php">Back to index</a>
     </p>
 
+    <?php if (is_logged_in()) { ?>
     <p>
         <a href="bird_new.php">Create Bird</a>
     </p>
+    <?php } ?>
 
     <?php if ($birds === []): ?>
         <p>No birds were found.</p>
@@ -67,7 +69,7 @@ $birds = Bird::find_all();
                             <a href="bird.php?id=<?= (int) $bird->id ?>">
                                 View Details
                             </a>
-
+                            <?php if (is_logged_in()) { ?>
                             |
 
                             <a href="bird_edit.php?id=<?= (int) $bird->id ?>">
@@ -78,6 +80,7 @@ $birds = Bird::find_all();
 <a href="bird_delete.php?id=<?= (int) $bird->id ?>">
         Delete
  </a>
+<?php } ?>
                         </td>
 
                     </tr>
