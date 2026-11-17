@@ -2,37 +2,20 @@
 
 ## Overview
 
-This assignment extends the Bird Directory application by implementing the Create portion of CRUD (Create, Read, Update, Delete) using the Active Record pattern.
+This assignment extends the Bird Directory application (`wnc_birds` database, `birds` table) by implementing the **Create** operation of CRUD using the Active Record pattern, allowing users to add validated bird records via a form and PDO prepared statements.
 
-Users can now add new bird records through a form. Submitted data is validated and stored in the database using PDO prepared statements.
+## Key Features & Files Modified
 
-## Features
+* **`public/birds.php`:** Serves as the directory view with a new **Create Bird** link.
+* **`public/bird_new.php`:** Handles POST requests, form validation, `Bird` object instantiation, and redirects upon creation.
+* **`private/classes/Bird.php`:** Acts as the model, implementing `create(): bool` to execute safe database inserts with PDO named placeholders and `lastInsertId()`.
 
-- Display all bird records
-- View individual bird details
-- Create new bird records
-- Form validation for required fields
-- PDO prepared statements for secure database inserts
-- Automatic retrieval of the newly created record ID
+## Architecture & Database Security
 
-## Files Modified
+* **MVC Direction:** Transitions toward MVC separation with the model handling database logic, `birds.php` managing presentation, and `bird_new.php` handling request flow.
+* **PDO Prepared Statements:** Uses named placeholders and `bindValue()` to secure inserts against SQL injection and handle special characters cleanly.
 
-### public/birds.php
+## Setup & Workflow
 
-Added a **Create Bird** link above the bird directory table.
-
-### public/bird_new.php
-
-Implemented:
-
-- POST request processing
-- Form validation
-- Creation of Bird objects from submitted form data
-- Redirect after successful record creation
-
-### private/classes/Bird.php
-
-Added:
-
-```php
-public function create(): bool
+* **Running Locally:** Configure credentials in `private/db_credentials.php` (from `private/db_credentials.example.php`) and launch `public/birds.php` via a local server (MAMP/XAMPP).
+* **Git Workflow:** Developed on the `dev-create` branch, incrementally committed, tested, and merged into `main` before pushing to GitHub.
