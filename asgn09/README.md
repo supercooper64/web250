@@ -19,3 +19,10 @@ This assignment extends the Bird Directory application (`wnc_birds` database, `b
 
 * **Running Locally:** Configure credentials in `private/db_credentials.php` (from `private/db_credentials.example.php`) and launch `public/birds.php` via a local server (MAMP/XAMPP).
 * **Git Workflow:** Developed on the `dev-create` branch, incrementally committed, tested, and merged into `main` before pushing to GitHub.
+
+
+## Project Links
+
+- **GitHub Repository:** https://github.com/supercooper64/web250/tree/main/asgn09
+
+- **Hosted Application:** https://webtech-182.com/web250/asgn09/public/birds.php
