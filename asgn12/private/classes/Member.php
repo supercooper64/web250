@@ -19,8 +19,68 @@ final class Member
         self::$database = $pdo;
     }
 
-    public static function find_by_username(string $username): ?self
+    public static function find_by_id(int $id): ?self
     {
+        if (self::$database === null) {
+            throw new RuntimeException(
+                'Call set_database() before find_by_id().'
+            );
+        }
+
+        $sql = '
+            SELECT *
+            FROM members
+            WHERE id = :id
+            LIMIT 1
+        ';
+
+        $statement = self::$database->prepare($sql);
+
+        $statement->bindValue(
+            ':id',
+            $id,
+            PDO::PARAM_INT
+        );
+
+        $statement->execute();
+
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($row === false) {
+            return null;
+        }
+
+        return self::from_row($row);
+    }
+
+    public static function find_all(): array
+    {
+        if (self::$database === null) {
+            throw new RuntimeException(
+                'Call set_database() before find_all().'
+            );
+        }
+
+        $sql = '
+            SELECT *
+            FROM members
+            ORDER BY last_name, first_name
+        ';
+
+        $statement = self::$database->query($sql);
+
+        $members = [];
+
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            $members[] = self::from_row($row);
+        }
+
+        return $members;
+    }
+
+    public static function find_by_username(
+        string $username
+    ): ?self {
         if (self::$database === null) {
             throw new RuntimeException(
                 'Call set_database() before find_by_username().'
@@ -53,8 +113,9 @@ final class Member
         return self::from_row($row);
     }
 
-    public static function find_by_email(string $email): ?self
-    {
+    public static function find_by_email(
+        string $email
+    ): ?self {
         if (self::$database === null) {
             throw new RuntimeException(
                 'Call set_database() before find_by_email().'
@@ -103,7 +164,8 @@ final class Member
                 username,
                 password_hash,
                 role
-            ) VALUES (
+            )
+            VALUES (
                 :first_name,
                 :last_name,
                 :email,
@@ -154,23 +216,122 @@ final class Member
         $result = $statement->execute();
 
         if ($result) {
-            $this->id = (int) self::$database->lastInsertId();
+            $this->id =
+                (int) self::$database->lastInsertId();
         }
 
         return $result;
     }
 
-    private static function from_row(array $row): self
+    public function update(): bool
     {
+        if (self::$database === null) {
+            throw new RuntimeException(
+                'Call set_database() before update().'
+            );
+        }
+
+        $sql = '
+            UPDATE members
+            SET
+                first_name = :first_name,
+                last_name = :last_name,
+                email = :email,
+                username = :username,
+                role = :role
+            WHERE id = :id
+        ';
+
+        $statement = self::$database->prepare($sql);
+
+        $statement->bindValue(
+            ':first_name',
+            $this->first_name,
+            PDO::PARAM_STR
+        );
+
+        $statement->bindValue(
+            ':last_name',
+            $this->last_name,
+            PDO::PARAM_STR
+        );
+
+        $statement->bindValue(
+            ':email',
+            $this->email,
+            PDO::PARAM_STR
+        );
+
+        $statement->bindValue(
+            ':username',
+            $this->username,
+            PDO::PARAM_STR
+        );
+
+        $statement->bindValue(
+            ':role',
+            $this->role,
+            PDO::PARAM_STR
+        );
+
+        $statement->bindValue(
+            ':id',
+            $this->id,
+            PDO::PARAM_INT
+        );
+
+        return $statement->execute();
+    }
+
+    public function delete(): bool
+    {
+        if (self::$database === null) {
+            throw new RuntimeException(
+                'Call set_database() before delete().'
+            );
+        }
+
+        $sql = '
+            DELETE FROM members
+            WHERE id = :id
+        ';
+
+        $statement = self::$database->prepare($sql);
+
+        $statement->bindValue(
+            ':id',
+            $this->id,
+            PDO::PARAM_INT
+        );
+
+        return $statement->execute();
+    }
+
+    private static function from_row(
+        array $row
+    ): self {
         $member = new self();
 
-        $member->id = (int) $row['id'];
-        $member->first_name = (string) $row['first_name'];
-        $member->last_name = (string) $row['last_name'];
-        $member->email = (string) $row['email'];
-        $member->username = (string) $row['username'];
-        $member->password_hash = (string) $row['password_hash'];
-        $member->role = (string) $row['role'];
+        $member->id =
+            (int) $row['id'];
+
+        $member->first_name =
+            (string) $row['first_name'];
+
+        $member->last_name =
+            (string) $row['last_name'];
+
+        $member->email =
+            (string) $row['email'];
+
+        $member->username =
+            (string) $row['username'];
+
+        $member->password_hash =
+            (string) $row['password_hash'];
+
+        $member->role =
+            (string) $row['role'];
 
         return $member;
     }
