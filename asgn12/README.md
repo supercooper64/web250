@@ -1,41 +1,33 @@
-# Assignment 11 - Member Registration and Authentication
+# Assignment 12 - Member Administration
 
-## Overview
+## Student
 
-This assignment extends the WNC Birds application by adding member registration, login, logout, authentication, and authorization features.
+Daniel Joseph Filz
 
-Users can register for an account, log in, and access protected bird management features. Visitors can browse bird records, but only authenticated members can create, update, or delete bird records.
+## Project Overview
 
-## Features
+This project extends the WNC Birds application by implementing authentication, authorization, role-based navigation, and member administration.
 
-- Display all bird records
-- View individual bird details
-- Create bird records (members only)
-- Update bird records (members only)
-- Delete bird records (members only)
-- Member registration
-- Member login
-- Member logout
-- Password hashing using PHP password_hash()
-- Authentication using PHP sessions
-- Environment variables using vlucas/phpdotenv
-- PDO prepared statements for secure database operations
+The application supports three user roles:
 
-## Composer
+- Visitor
+- Member
+- Administrator
 
-This project uses:
+Visitors can browse bird records. Members can create, edit, and delete bird records. Administrators can manage both bird records and member accounts.
+
+---
+
+## Setup
+
+1. Clone the repository.
+2. Run:
 
 ```bash
-vlucas/phpdotenv
+composer install
 ```
 
-to load environment variables from a `.env` file.
-
-## Environment Variables
-
-The application uses a `.env` file for database credentials.
-
-Example:
+3. Create a `.env` file and configure your database credentials:
 
 ```env
 DB_HOST=
@@ -45,84 +37,142 @@ DB_USER=
 DB_PASS=
 ```
 
-The actual `.env` file is excluded from GitHub using `.gitignore`.
+4. Import the database schema.
+5. Start Apache and MySQL.
+6. Open the application in your browser.
 
-## Files Added
+The `.env` file is excluded from GitHub using `.gitignore`.
 
-### private/classes/Member.php
+---
 
-Added support for:
+## User Roles
 
-- Member creation
-- Member lookup by username
-- Member lookup by email
+### Visitor
 
-### public/register.php
-
-Implements:
-
-- Member registration
-- Form validation
-- Password hashing
-- Duplicate username checking
-- Duplicate email checking
-
-### public/login.php
-
-Implements:
-
-- Member login
-- Password verification
-- Session creation
-
-### public/logout.php
-
-Implements:
-
-- Session destruction
-- Secure logout
-
-### private/functions/auth_functions.php
-
-Adds:
-
-```php
-is_logged_in()
-require_login()
-```
-
-to protect authenticated pages.
-
-## Authorization
-
-Visitors can:
+Can:
 
 - View bird directory
 - View bird details
 - Register
 - Login
 
-Authenticated members can:
+Cannot:
 
 - Create birds
-- Update birds
+- Edit birds
+- Delete birds
+- Access administrative pages
+
+### Member
+
+Can:
+
+- View birds
+- Create birds
+- Edit birds
 - Delete birds
 - Logout
+
+Cannot:
+
+- Access member administration pages
+
+### Administrator
+
+Can:
+
+- Perform all member actions
+- View members
+- Create members
+- Edit members
+- Delete members
+- Access all administrative pages
+
+---
+
+## Administrator Pages
+
+- `admin/index.php`
+- `admin/members.php`
+- `admin/member.php`
+- `admin/new_member.php`
+- `admin/edit_member.php`
+- `admin/delete_member.php`
+
+---
+
+## Features
+
+### Authentication
+
+- Member registration
+- Member login
+- Member logout
+- Session-based authentication
+- Password hashing using `password_hash()`
+- Password verification using `password_verify()`
+
+### Authorization
+
+- Visitor, Member, and Administrator roles
+- Protected pages using authentication checks
+- Administrator-only member management
+
+### Bird Management
+
+- View bird records
+- Create bird records
+- Edit bird records
+- Delete bird records
+
+### Member Administration
+
+- View all members
+- View member details
+- Create members
+- Edit members
+- Delete members
+- Self-delete protection
+- Self-demotion protection
+
+### Security
+
+- PDO prepared statements
+- CSRF protection
+- Environment variables using `vlucas/phpdotenv`
+
+---
 
 ## Testing
 
 Verified:
 
-1. Member registration
-2. Member login
-3. Member logout
-4. Password hashing
-5. Session authentication
-6. Bird creation when logged in
-7. Bird update when logged in
-8. Bird deletion when logged in
-9. Access restrictions when logged out
+- Member registration
+- Member login
+- Member logout
+- Password hashing
+- Session authentication
+- Bird creation
+- Bird updates
+- Bird deletion
+- Member creation
+- Member updates
+- Member deletion
+- Visitor access restrictions
+- Member access restrictions
+- Administrator access restrictions
+- Personalized navigation
+- Self-delete prevention
+- Self-demotion prevention
 
-## Branch Workflow
+---
 
-Development was completed on the `dev-users-login` branch and merged into `main` using a Pull Request.
+## Assignment Questions
+
+### Why do we need `require_admin()` when the Admin link is hidden?
+
+Hiding a navigation link only removes it from the user interface. A user can still manually enter the URL. The `require_admin()` function protects administrative pages on the server and prevents unauthorized access.
+
+### What does `from_row()` return, and how does the member list use it?
+
+The `from_row()` method converts a database row into a Member object. The member list uses these
